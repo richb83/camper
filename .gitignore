@@ -1,5 +1,5 @@
 venv/*
 .DS_Store
 settings.json
-camper.code.workspace
+camper.code-workspace
 
