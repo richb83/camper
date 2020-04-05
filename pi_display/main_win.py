@@ -11,47 +11,23 @@ from mainwindow import Ui_MainWindow
 
 
 COLD_STYLE = """
-QProgressBar{
-    border-width: 1px
-    margin: 1px;
-    width: 23px;
-    border-style: outset;
-    border-radius: 5px;
-    text-algin: center
-}
 QProgressBar::chunk{
-    background-color: #2002f2;
-    width: 23px
+    background-color: #63a1f2;
+    width: 22px;
 }
 """
 
 NORMAL_STYLE = """
-QProgressBar{
-    border-width: 1px
-    margin: 1px;
-    width: 23px;
-    border-style: outset;
-    border-radius: 5px;
-    text-algin: center
-}
 QProgressBar::chunk{
-    background-color: #02f256;
-    width: 23px
+    background-color: #63f280;
+    width: 22px;
 }
 """
 
 HOT_STYLE = """
-QProgressBar{
-    border-width: 1px
-    margin: 1px;
-    width: 23px;
-    border-style: outset;
-    border-radius: 5px;
-    text-algin: center
-}
 QProgressBar::chunk{
-    background-color: #f22602;
-    width: 23px
+    background-color: #f04f57;
+    width: 22px;
 }
 """
 
@@ -66,10 +42,10 @@ class Main_Win(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.show()
 
-        self.pbOutside.setStyle(QStyleFactory.create('Fusion'))
-        self.pbInside.setStyle(QStyleFactory.create('Fusion'))
-        self.pbGarage.setStyle(QStyleFactory.create('Fusion'))
-        self.pbStorage.setStyle(QStyleFactory.create('Fusion'))
+        # self.pbOutside.setStyle(QStyleFactory.create('Fusion'))
+        # self.pbInside.setStyle(QStyleFactory.create('Fusion'))
+        # self.pbGarage.setStyle(QStyleFactory.create('Fusion'))
+        # self.pbStorage.setStyle(QStyleFactory.create('Fusion'))
         self.btnGarage.setCheckable(True)
         self.btnGarage.toggled.connect(self.btnGarage_changed)
         self.btnStorage.setCheckable(True)
@@ -82,7 +58,7 @@ class Main_Win(QMainWindow, Ui_MainWindow):
         if self.btnGarage.isChecked():
             self.btnGarage.setStyleSheet("background-color: rgb(255, 0, 0);\n"
                                          "margin: 1px;\n"
-                                         "border-color: #0c457w;\n"
+                                         "border-color: #343536;\n"
                                          "border-style: outset;\n"
                                          "border-radius: 3px;\n"
                                          "border-width: 1px;"
@@ -90,18 +66,24 @@ class Main_Win(QMainWindow, Ui_MainWindow):
         else:
             self.btnGarage.setStyleSheet("background-color: rgb(0, 255, 0);\n"
                                          "margin: 1px;\n"
-                                         "border-color: #0c457w;\n"
+                                         "border-color: #343536;\n"
                                          "border-style: outset;\n"
                                          "border-radius: 3px;\n"
                                          "border-width: 1px;"
                                          )
-        self.pbGarage.setValue(random.randrange(-15, 100))
+        self.pbGarage.setValue(random.randrange(-15, 110))
+        if self.pbGarage.value() <= 34:
+            self.pbGarage.setStyleSheet(COLD_STYLE)
+        elif self.pbGarage.value() <= 90:
+            self.pbGarage.setStyleSheet(NORMAL_STYLE)
+        else:
+            self.pbGarage.setStyleSheet(HOT_STYLE)
 
     def btnStorage_changed(self):
         if self.btnStorage.isChecked():
             self.btnStorage.setStyleSheet("background-color: rgb(255, 0, 0);\n"
                                           "margin: 1px;\n"
-                                          "border-color: rgb(255, 255, 255)\n"
+                                          "border-color: rgb(255, 255, 255);\n"
                                           "border-style: outset;\n"
                                           "border-radius: 3px;\n"
                                           "border-width: 1px;"
@@ -114,7 +96,13 @@ class Main_Win(QMainWindow, Ui_MainWindow):
                                           "border-radius: 3px;\n"
                                           "border-width: 1px;"
                                           )
-        self.pbStorage.setValue(random.randrange(-15, 100))
+        self.pbStorage.setValue(random.randrange(-15, 110))
+        if self.pbStorage.value() <= 34:
+            self.pbStorage.setStyleSheet(COLD_STYLE)
+        elif self.pbStorage.value() <= 90:
+            self.pbStorage.setStyleSheet(NORMAL_STYLE)
+        else:
+            self.pbStorage.setStyleSheet(HOT_STYLE)
 
     def btnAir_changed(self):
         if self.btnAir.isChecked():
@@ -134,7 +122,7 @@ class Main_Win(QMainWindow, Ui_MainWindow):
                                       "border-width: 1px;"
                                       )
 
-        newVal = random.randrange(-15, 100)
+        newVal = random.randrange(-15, 110)
         self.pbOutside.setValue(newVal)
         # self.pbOutside.setStyle(QStyleFactory.create('Fusion'))
         if newVal <= 34:
