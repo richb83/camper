@@ -1,4 +1,5 @@
 venv/*
 .DS_Store
-settings.json
+.vscode
+*.pyc
 camper.code-workspace
